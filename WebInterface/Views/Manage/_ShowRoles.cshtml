@@ -1,0 +1,9 @@
+﻿@model WebInterface.Models.RolesDropDownViewModel
+
+@foreach (var item in Model.Roles)
+{
+    if(item.Value==Model.SelectedRoleId){
+        item.Selected = true;
+    }
+}
+@Html.DropDownListFor(x => x.Roles, Model.Roles, new { @class = "form-control role-for" })

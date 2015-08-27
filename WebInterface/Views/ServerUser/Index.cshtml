@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UserHelperCL.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="well">
+    <h2>Brugeroverblik</h2>
+
+    <p>
+        @Html.ActionLink("Opret een bruger", "Create")
+    </p>
+    <p>
+        @Html.ActionLink("Opret mange brugere", "CreateMany")
+    </p>
+
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>
+                Navn
+            </th>
+
+            <th>
+                Holdnavn
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", "ServerUser", new { id = item.StudentId }, null)
+                </td>
+
+                <td>
+                    @Html.ActionLink(item.Team.Name, "Details", "ServerTeam", new { id = item.Team.TeamId }, null)
+                </td>
+                <td>
+                    Rediger |
+                    @Html.ActionLink("Detaljer", "Details", new { id = item.StudentId }) |
+                    @Html.ActionLink("Slet", "Delete", new { id = item.StudentId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

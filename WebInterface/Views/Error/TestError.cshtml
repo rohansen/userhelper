@@ -1,0 +1,12 @@
+﻿@model Exception
+@{
+    ViewBag.Title = "TestError";
+}
+
+<h2>TestError</h2>
+<h1>@Model.Message</h1>
+
+
+<p>@Model.InnerException</p>
+
+<p>@Model.StackTrace</p>

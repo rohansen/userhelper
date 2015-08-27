@@ -1,0 +1,111 @@
+﻿@model UserHelperCL.Models.Team
+
+@{
+    ViewBag.Title = "Detaljer";
+}
+<div class="well">
+    <h2>Detaljer</h2>
+
+    <div>
+        <h4>Team</h4>
+        <hr />
+        @Html.ActionLink("Se printvenlig version", "Print", new { id = Model.TeamId })
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.ActionLink(Model.Name, "Details", "ServerTeam", new { id = Model.TeamId }, null)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StartDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StartDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EndDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EndDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CreatedDate)
+            </dd>
+
+        </dl>
+        <h1>Users in team</h1>
+        <table class="table">
+            <tr>
+                <th>
+                    Name
+                </th>
+
+                <th>
+                    Username
+                </th>
+                <th>
+                    Password
+                </th>
+                <th>
+                    Port
+                </th>
+                <th>
+                    Windows User Group Name
+                </th>
+                <th>
+                    Credentials
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Students)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Credentials.DatabaseUserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Credentials.DatabasePassword)
+                    </td>
+                    <td>
+                        <a href="http://server-awesome:@item.Credentials.WebsitePort">@item.Credentials.WebsitePort</a>
+                      
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Credentials.WindowsUserGroupName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Credentials.DatabaseUserName)
+                    </td>
+                    <td>
+                        Edit |
+                        @Html.ActionLink("Details", "Details", "ServerUser", new { id = item.StudentId }, null) |
+                        @Html.ActionLink("Delete", "Delete", "ServerUser", new { id = item.StudentId }, null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.TeamId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

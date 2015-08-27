@@ -1,0 +1,54 @@
+﻿@model IEnumerable<UserHelperCL.Models.Team>
+
+@{
+    ViewBag.Title = "Index";
+}
+<div class="well">
+    <h2>Holdoverblik</h2>
+
+    <p>
+        @Html.ActionLink("Opret nyt hold", "Create")
+    </p>
+
+    <table class="table table-striped table-hover">
+        <tr>
+            <th>
+                Navn
+            </th>
+            <th>
+                Startdato
+            </th>
+            <th>
+                Slutdato
+            </th>
+            <th>
+                Oprettet
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Details", new { id = item.TeamId })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.ActionLink("Rediger", "Edit", new { id = item.TeamId }) |
+                    @Html.ActionLink("Detaljer", "Details", new { id = item.TeamId }) |
+                    @Html.ActionLink("Slet", "Delete", new { id = item.TeamId })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

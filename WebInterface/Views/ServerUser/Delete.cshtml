@@ -1,0 +1,87 @@
+﻿@model UserHelperCL.Models.Student
+
+@{
+    ViewBag.Title = "Slet";
+}
+<div class="well">
+    <h2>Slet bruger</h2>
+
+    <h3>Er du sikker på at du vil slette denne bruger?</h3>
+    <div>
+        <h4>Student</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.HiddenFor(x => x.StudentId)
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Credentials.DatabaseUserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Credentials.DatabaseUserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Credentials.DatabasePassword)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Credentials.DatabasePassword)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Credentials.FTPUserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Credentials.FTPUserName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Credentials.FTPPassword)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Credentials.FTPPassword)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Credentials.WebsitePort)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Credentials.WebsitePort)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Credentials.WindowsUserGroupName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Credentials.WindowsUserGroupName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Team.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Team.Name)
+            </dd>
+
+
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" /> |
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        }
+    </div>
+</div>

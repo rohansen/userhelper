@@ -1,0 +1,49 @@
+﻿@model UserHelperCL.Models.Team
+@{
+    ViewBag.Title = "Print";
+    Layout = null;
+}
+<link href="/Content/bootstrap.css" rel="stylesheet" />
+<h2>Print</h2>
+<table class="table table-striped">
+    <tr>
+        <th>
+            Name
+        </th>
+
+        <th>
+            Username
+        </th>
+        <th>
+            Password
+        </th>
+        <th>
+            Port
+        </th>
+     
+    </tr>
+
+    @foreach (var item in Model.Students)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Credentials.DatabaseUserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credentials.DatabasePassword)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Credentials.WebsitePort)
+            </td>
+           
+        </tr>
+    }
+
+</table>
+
+
+

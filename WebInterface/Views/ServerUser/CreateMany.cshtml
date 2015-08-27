@@ -1,0 +1,109 @@
+﻿@model WebInterface.Models.CreateManyViewModel
+
+@{
+    ViewBag.Title = "Opret mange brugere";
+}
+<div class="well">
+    <h2>Opret mange brugere</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="form-horizontal">
+                    <h4>Indtast oplysninger</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserNamePrefix, "Brugernavn Prefiks", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.UserNamePrefix, new { htmlAttributes = new { @class = "form-control floating-label", @placeholder = "Indtast det som brugernavnene skal starte med", @autocomplete = "off" } })
+                            @Html.ValidationMessageFor(model => model.UserNamePrefix, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserNameSuffix, "Brugernavn Suffiks", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.UserNameSuffix, new { @class = "form-control floating-label", @placeholder = "Indtast det tal som brugernavnets endelse starter på eg. 1", @autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.UserNameSuffix, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Credentials.DatabasePassword, "Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.Credentials.DatabasePassword, new { @class = "form-control floating-label", @placeholder = "Indtast password for alle brugere", @autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.Credentials.DatabasePassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Credentials.WebsitePort, "Port", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextBoxFor(x => x.Credentials.WebsitePort, new { @class = "form-control floating-label", @placeholder = "Indtast den port brugerens website skal starte på", @Value = ViewBag.StartPort, @autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.Credentials.WebsitePort, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Team.TeamId, "Hold", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(x => x.Team.TeamId, (SelectList)ViewBag.Teams, new { @class = "form-control" })
+                            <span class="help-block">Vælg det hold/den klasse brugeren skal tilknyttes.</span>
+                            @Html.ValidationMessageFor(model => model.Team.TeamId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Credentials.WindowsUserGroupName, "Windows brugergruppe", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownListFor(x => x.Credentials.WindowsUserGroupName, (SelectList)ViewBag.UserGroup, new { @class = "form-control" })
+                            <span class="help-block">Vælg windows brugergruppe. For FTP adgang, vælg "FTPUsers"</span>
+                            @Html.ValidationMessageFor(model => model.Credentials.WindowsUserGroupName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.StudentNames, "Fulde navne", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(x => x.StudentNames, new { @class = "form-control floating-label", @rows = 8, @placeholder = "Fulde navne på brugere, disse skal indtastes kommasepereret. eg. Jens Hansen, Knud Jensen", @autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.StudentNames, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Credentials.DisablePasswordChange, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                         
+                                     
+                                    @Html.CheckBoxFor(x => x.Credentials.DisablePasswordChange) Må ikke skifte password
+                                
+                            @Html.ValidationMessageFor(model => model.Credentials.DisablePasswordChange, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.Credentials.PasswordNeverExpires, "", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            
+
+                                    @Html.CheckBoxFor(x => x.Credentials.PasswordNeverExpires) Password udløber aldrig
+                                 
+                            @Html.ValidationMessageFor(model => model.Credentials.PasswordNeverExpires, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</div>

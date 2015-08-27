@@ -1,0 +1,62 @@
+﻿@model List<WebInterface.Models.ApplicationUser>
+@{
+    ViewBag.Title = "ShowAllUsers";
+}
+<div class="well">
+    <h2>ShowAllUsers</h2>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Navn
+                </th>
+                <th>
+                    Brugernavn
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Action
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                SelectList roles = (SelectList)ViewBag.Roles;
+
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>
+
+                        @foreach (var role in roles)
+                        {
+                            <div class="checkbox">
+                                <label>
+                                    @if (item.Roles.Any(x => x.RoleId == role.Value))
+                                    {
+                                        @Html.CheckBox(role.Value, new { @checked = true, @class = "chkRole", @data_chk_for = @item.Id }) @role.Text
+                                    }
+                                    else
+                                    {
+                                        @Html.CheckBox(role.Value, new { @class = "chkRole", @data_chk_for = @item.Id }) @role.Text
+                                    }
+
+                                </label>
+                            </div>
+
+                        }
+
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+
+
+    </table>
+</div>
